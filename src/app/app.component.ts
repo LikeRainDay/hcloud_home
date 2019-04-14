@@ -3,12 +3,12 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
 import { DOCUMENT } from '@angular/platform-browser';
-import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
+import { Location } from '@angular/common';
 
-var didScroll;
-var lastScrollTop = 0;
-var delta = 5;
-var navbarHeight = 0;
+let didScroll;
+let lastScrollTop = 0;
+const delta = 5;
+const navbarHeight = 0;
 
 @Component({
     selector: 'app-root',
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     @HostListener('window:scroll', ['$event'])
     hasScrolled() {
 
-        var st = window.pageYOffset;
+        let st = window.pageYOffset;
         // Make sure they scroll more than delta
         if(Math.abs(lastScrollTop - st) <= delta)
             return;
@@ -53,8 +53,8 @@ export class AppComponent implements OnInit {
         lastScrollTop = st;
     };
     ngOnInit() {
-      var navbar : HTMLElement = this.element.nativeElement.children[0].children[0];
-      this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
+        let navbar: HTMLElement = this.element.nativeElement.children[0].children[0];
+        this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
           if (window.outerWidth > 991) {
               window.document.children[0].scrollTop = 0;
           }else{
