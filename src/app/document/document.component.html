@@ -1,3 +1,26 @@
-<p>
-  document works!
-</p>
+<main>
+    <section class="section section-shaped section-lg">
+        <div class="shape shape-style-1 bg-gradient-default">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 modal-content">
+                    <tree [tree]="preBuyDoc" (nodeSelected)="handleSelected($event)">></tree>
+                    <tree [tree]="openVersionDoc" (nodeSelected)="handleSelected($event)">></tree>
+                    <tree [tree]="priceVersionDoc" (nodeSelected)="handleSelected($event)">></tree>
+                </div>
+                <div class="col-md-10 modal-content">
+                    <markdown [src]="markdownUrl"></markdown>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
