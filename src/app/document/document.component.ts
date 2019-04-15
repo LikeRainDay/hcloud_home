@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NodeEvent, TreeModel} from "ng2-tree";
 
-const nginx_proxy_url = "http://47.95.207.79:41900";
+const nginx_proxy_url = "http://localhost:4200";
+// const nginx_proxy_url = "http://47.95.207.79:80";
 
 @Component({
     selector: 'app-document',
