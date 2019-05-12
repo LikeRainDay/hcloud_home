@@ -1,5 +1,11 @@
 {
-  "/valor-software":{
-    "target":"http://47.95.207.79:41900"
+  "/auth/*": {
+    "target": "http://localhost:10000",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/auth": ""
+    }
   }
 }

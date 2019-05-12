@@ -15,9 +15,11 @@ import {FooterComponent} from './shared/footer/footer.component';
 import {LoginComponent} from './login/login.component';
 import {PriceComponent} from './price/price.component';
 import {DocumentComponent} from './document/document.component';
-import {MarkdownModule, MarkedOptions} from "ngx-markdown";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {TreeModule} from "ng2-tree";
+import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpUrlEncodingCodec} from '@angular/common/http';
+import {TreeModule} from 'ng2-tree';
+import {BseInterceptorService} from './@service/@interceptor/base-interceptor.service';
+import {LoginApiService} from './@service/login-api.service';
 
 @NgModule({
     declarations: [
@@ -57,7 +59,14 @@ import {TreeModule} from "ng2-tree";
         RouterModule,
         AppRoutingModule
     ],
-    providers: [],
+    providers: [
+        LoginApiService,
+        HttpUrlEncodingCodec,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: BseInterceptorService,
+            multi: true,
+        }],
     bootstrap: [AppComponent]
 })
 export class AppModule {
