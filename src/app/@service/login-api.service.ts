@@ -24,6 +24,7 @@ export class LoginApiService {
         header.set('isToken', 'false');
         header.set('TENANT_ID', '1');
         header.set('Authorization', AUTHORIZATION);
+        header.set('Content-Type', 'application/x-www-form-urlencoded');
         return this.http.get<any>(url, {
             headers: header,
             params: {

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
+import {LoginApiService} from '../login-api.service';
 
 const BASE_URL = 'http://localhost:10000';
 
@@ -24,6 +25,11 @@ export class BseInterceptorService implements HttpInterceptor {
             const token = localStorage.getItem('token');
             newReq.headers.set('token', token ? '' : token);
         }
+        // if (!req.headers.has('Authorization')) {
+        //     newReq.headers.set('isToken', 'false');
+        //     newReq.headers.set('TENANT_ID', '1');
+        //     newReq.headers.set('Authorization', 'Basic aGNsb3VkOmhjbG91ZF9zZWN1cml0eQ==');
+        // }
         // send cloned request with header to the next handler.
         return next.handle(newReq)
             .pipe(
