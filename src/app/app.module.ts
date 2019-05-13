@@ -16,9 +16,8 @@ import {LoginComponent} from './login/login.component';
 import {PriceComponent} from './price/price.component';
 import {DocumentComponent} from './document/document.component';
 import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpUrlEncodingCodec} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TreeModule} from 'ng2-tree';
-import {BseInterceptorService} from './@service/@interceptor/base-interceptor.service';
 import {LoginApiService} from './@service/login-api.service';
 
 @NgModule({
@@ -60,14 +59,7 @@ import {LoginApiService} from './@service/login-api.service';
         AppRoutingModule
     ],
     providers: [
-        LoginApiService,
-        HttpUrlEncodingCodec,
-        // ,
-        // {
-        //     provide: HTTP_INTERCEPTORS,
-        //     useClass: BseInterceptorService,
-        //     multi: true,
-        // }],
+        LoginApiService
     ],
     bootstrap: [AppComponent]
 })
