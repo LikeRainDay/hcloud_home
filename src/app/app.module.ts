@@ -62,11 +62,13 @@ import {LoginApiService} from './@service/login-api.service';
     providers: [
         LoginApiService,
         HttpUrlEncodingCodec,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: BseInterceptorService,
-            multi: true,
-        }],
+        // ,
+        // {
+        //     provide: HTTP_INTERCEPTORS,
+        //     useClass: BseInterceptorService,
+        //     multi: true,
+        // }],
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

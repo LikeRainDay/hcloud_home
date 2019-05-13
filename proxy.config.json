@@ -1,6 +1,6 @@
 {
   "/auth/*": {
-    "target": "http://localhost:10000",
+    "target": "http://localhost:10000/auth",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,

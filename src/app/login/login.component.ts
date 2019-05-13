@@ -20,8 +20,10 @@ export class LoginComponent implements OnInit {
 
     login(account: string, password: string) {
         console.log(`账号为：${account}`);
-        console.log(`密码为：${password}`);
-        const observable = this.service.loginByPassword(account, this.encoder.encodeKey(password), '11', '11');
+        console.log(`密码为1：${password}`);
+        console.log(`密码为2：${encodeURIComponent(password)}`);
+        console.log(`密码为2：${encodeURIComponent(password.trim())}`);
+        const observable = this.service.loginByPassword(account, password, '11', '11');
         observable.subscribe((data: any) =>
             console.log(data)
         );
