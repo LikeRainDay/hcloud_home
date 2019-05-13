@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
-import {LoginApiService} from '../login-api.service';
 
 const BASE_URL = 'http://localhost:10000';
 
@@ -17,21 +16,21 @@ export class BseInterceptorService implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const newReq = req.clone({
-            url: `${BASE_URL}${req.url}`,
-        });
-        if (!req.headers.get('token')) {
-            /*token数据来源自己设置，我常用localStorage存取相关数据*/
-            const token = localStorage.getItem('token');
-            newReq.headers.set('token', token ? '' : token);
-        }
+        // const newReq = req.clone({
+        //     url: `${BASE_URL}${req.url}`,
+        // });
+        // if (!req.headers.get('token')) {
+        //     /*token数据来源自己设置，我常用localStorage存取相关数据*/
+        //     const token = localStorage.getItem('token');
+        //     newReq.headers.set('token', token ? '' : token);
+        // }
         // if (!req.headers.has('Authorization')) {
         //     newReq.headers.set('isToken', 'false');
         //     newReq.headers.set('TENANT_ID', '1');
         //     newReq.headers.set('Authorization', 'Basic aGNsb3VkOmhjbG91ZF9zZWN1cml0eQ==');
         // }
         // send cloned request with header to the next handler.
-        return next.handle(newReq)
+        return next.handle(req)
             .pipe(
                 /*失败时重试2次，可自由设置*/
                 retry(2),

@@ -18,13 +18,13 @@ export class LoginApiService {
     * desc: 通过用户密码登录
     * */
     public loginByPassword(username: string, password: string, code: string, randomStr: string): Observable<any> {
-        const url = '/auth/oauth/token';
+        const url =  '/auth/oauth/token';
         const grant_type = 'password';
-        const header = new HttpHeaders();
-        header.set('isToken', 'false');
-        header.set('TENANT_ID', '1');
-        header.set('Authorization', AUTHORIZATION);
-        header.set('Content-Type', 'application/x-www-form-urlencoded');
+        const header = new HttpHeaders()
+            .set('isToken', 'false')
+            .set('Authorization', AUTHORIZATION)
+            .set('Access-Control-Request-Headers', '*')
+            .set('TENANT_ID', '1');
         return this.http.get<any>(url, {
             headers: header,
             params: {
