@@ -60,22 +60,15 @@ export class LoginApiService {
     public loginByPassword(username: string, password: string, code: string, randomStr: string): Observable<any> {
         const url = '/auth/oauth/token';
         const grant_type = 'password';
-        const encryPassword = this.encryptClick(password);
-        const encode = encodeURIComponent(encryPassword);
+        const urlEncode = encodeURIComponent(this.encryptClick(password));
         const header = new HttpHeaders()
             .set('isToken', 'false')
             .set('Authorization', AUTHORIZATION)
             .set('TENANT_ID', '1');
-        return this.http.get<any>(url, {
-            headers: header,
-            params: {
-                username: username,
-                password: encode,
-                code: code,
-                grant_type: grant_type,
-                scope: scope
-            }
-        }).pipe(
+        return this.http.get<any>(
+            `${url}?username=${username}&password=${urlEncode}&code=${code}&grant_type=${grant_type}&scope=${scope}`, {
+                headers: header
+            }).pipe(
             catchError(this.handleError('loginByPassword', []))
         );
     }
