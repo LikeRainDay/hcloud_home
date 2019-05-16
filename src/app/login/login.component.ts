@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginApiService} from '../@service/login-api.service';
+import {TokenBean} from '../@common/ServiceBean';
 
 @Component({
     selector: 'app-login',
@@ -18,8 +19,11 @@ export class LoginComponent implements OnInit {
 
     login(account: string, password: string) {
         const observable = this.service.loginByPassword(account, password, '11', '11');
-        observable.subscribe((data: any) =>
-            console.log(data)
+        observable.subscribe((data: TokenBean) => {
+                const dd = data.access_token;
+                console.log(dd);
+                console.log(data);
+            }
         );
     }
 }

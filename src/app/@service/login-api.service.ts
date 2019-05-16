@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {JSEncrypt} from '../../jslibs/jsencrypt/jsencrypt';
-import {encode} from 'punycode';
+import {TokenBean} from '../@common/ServiceBean';
 
 const scope = 'server';
 const AUTHORIZATION = 'Basic aGNsb3VkOmhjbG91ZF9zZWN1cml0eQ==';
@@ -57,7 +57,7 @@ export class LoginApiService {
     /*
     * desc: 通过用户密码登录
     * */
-    public loginByPassword(username: string, password: string, code: string, randomStr: string): Observable<any> {
+    public loginByPassword(username: string, password: string, code: string, randomStr: string): Observable<TokenBean> {
         const url = '/auth/oauth/token';
         const grant_type = 'password';
         const urlEncode = encodeURIComponent(this.encryptClick(password));
@@ -65,7 +65,7 @@ export class LoginApiService {
             .set('isToken', 'false')
             .set('Authorization', AUTHORIZATION)
             .set('TENANT_ID', '1');
-        return this.http.get<any>(
+        return this.http.get<TokenBean>(
             `${url}?username=${username}&password=${urlEncode}&code=${code}&grant_type=${grant_type}&scope=${scope}`, {
                 headers: header
             }).pipe(
