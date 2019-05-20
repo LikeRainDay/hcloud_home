@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
+import {OAUTH_ACCESS_TOKEN} from '../../@common/Constant';
 
 const BASE_URL = 'http://localhost:10000';
 
@@ -18,12 +19,10 @@ export class BseInterceptorService implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const newReq = req.clone({
             url: `${req.url}`,
+            headers: sessionStorage.hasOwnProperty(OAUTH_ACCESS_TOKEN)
+                ? req.headers.set('Authorization', `Bearer ${sessionStorage.getItem(OAUTH_ACCESS_TOKEN)}`) : req.headers
         });
-        if (!req.headers.get('token')) {
-            /*token数据来源自己设置，我常用localStorage存取相关数据*/
-            const token = localStorage.getItem('token');
-            newReq.headers.set('token', token ? '' : token);
-        }
+
         // send cloned request with header to the next handler.
         return next.handle(newReq)
             .pipe(
