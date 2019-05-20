@@ -35,7 +35,12 @@
                         </div>
                         <div class="card-body px-lg-5 py-lg-5">
                             <div class="text-center text-muted mb-4">
-                                <small>账号登录</small>
+                                <div>
+                                    <small>账号登录</small>
+                                </div>
+                                <div *ngIf="inputIsError">
+                                    <small style="color: #a11918">输入的账号或密码有误</small>
+                                </div>
                             </div>
                             <form role="form">
                                 <div class="form-group mb-3" [ngClass]="{'focused':focus===true}">
@@ -43,7 +48,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="账号" type="text" (focus)="focus=true"
+                                        <input (keyup)="inputIsError=false" class="form-control" placeholder="账号"
+                                               type="text" (focus)="focus=true"
                                                #account (blur)="focus=false">
                                     </div>
                                 </div>
@@ -52,7 +58,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="密码" type="password"
+                                        <input (keyup)="inputIsError=false" class="form-control" placeholder="密码"
+                                               type="password"
                                                #password (focus)="focus1=true" (blur)="focus1=false">
                                     </div>
                                 </div>
