@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginApiService} from '../@service/login-api.service';
+import {ApiService} from '../@service/api.service';
 import {TokenBean} from '../@common/ServiceBean';
 import {APP_TENANT_ID, APP_USER_ID, OAUTH_ACCESS_TOKEN, OAUTH_REFRSH_TOKEN} from '../@common/Constant';
 import {Location} from '@angular/common';
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
     inputIsError = false;
 
-    constructor(private service: LoginApiService, private router: Router) {
+    constructor(private service: ApiService, private router: Router) {
     }
 
     ngOnInit() {

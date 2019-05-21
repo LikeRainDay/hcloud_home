@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {JSEncrypt} from '../../jslibs/jsencrypt/jsencrypt';
-import {TokenBean} from '../@common/ServiceBean';
 import {OAUTH_ACCESS_TOKEN} from '../@common/Constant';
 
 const scope = 'server';
@@ -12,14 +11,8 @@ const AUTHORIZATION = 'Basic aGNsb3VkOmhjbG91ZF9zZWN1cml0eQ==';
 @Injectable({
     providedIn: 'root'
 })
-export class LoginApiService {
-
+export class ApiService {
     jsEncrypt: JSEncrypt;
-
-    publicKey = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxxCSrFW0M+Kx5lP8qzgEIX40Ep5ErbmIbGxoGmBXcU5tIOv' +
-        'xTAEqa+GUo1MwwNZwzwPt2g4eqHQt1v7XHLuyfKNbAD81YfjzC2UUKJnmdC6SpkXWIa2xjeALrK6Pbb0QONtIAxP1siVi5xNLudCQ' +
-        'nGgHHFX5HkH1PsDylBNX0qHeqH7dkVhNTIU325ggtO9g8j8bF0PzkBmo6oP4rXgxbgT9lg4B3YOk1YRs77EWNoSCTcW1W+IgNfCQ3u' +
-        'C9CcPB8t9KqPA/eupP1MaCfbmHoodx+31zMXWkipniXoE73DlLETHvYyP4MXXNYrSPBGx4XmYqXspsAaMd6K+yj1NZcQIDAQAB';
 
     private = 'MIIEowIBAAKCAQEAxxCSrFW0M+Kx5lP8qzgEIX40Ep5ErbmIbGxoGmBXcU5tIOvxTAEqa+GUo1MwwNZwzwPt2g4eqHQt1' +
         'v7XHLuyfKNbAD81YfjzC2UUKJnmdC6SpkXWIa2xjeALrK6Pbb0QONtIAxP1siVi5xNLudCQnGgHHFX5HkH1PsDylBNX0qHeqH7' +
@@ -42,11 +35,6 @@ export class LoginApiService {
         this.jsEncrypt = new JSEncrypt({
             default_key_size: 2048
         });
-    }
-
-    private decryptClick(inputValue: string): string {
-        this.jsEncrypt.setPrivateKey(this.private);
-        return this.jsEncrypt.decrypt(inputValue).toString();
     }
 
     private encryptClick(inputValue: string): string {

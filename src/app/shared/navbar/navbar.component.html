@@ -27,19 +27,23 @@
             </div>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                 <li class="nav-item">
-                    <button  [routerLink]="['/home']" type="button" class="btn btn-default btn-sm">主页</button>
+                    <button [routerLink]="['/home']" type="button" class="btn btn-default btn-sm">主页</button>
                 </li>
                 <li class="nav-item">
-                    <button  [routerLink]="['/document']" type="button" class="btn btn-primary btn-sm">文档</button>
+                    <button [routerLink]="['/document']" type="button" class="btn btn-primary btn-sm">文档</button>
                 </li>
                 <li class="nav-item">
-                    <button  [routerLink]="['/price']" type="button" class="btn btn-info btn-sm">价格</button>
+                    <button [routerLink]="['/price']" type="button" class="btn btn-info btn-sm">价格</button>
                 </li>
-                <li class="nav-item">
-                    <button  [routerLink]="['/login']" type="button" class="btn btn-success btn-sm">登录</button>
+
+                <li class="nav-item" *ngIf="userInfo==null">
+                    <button [routerLink]="['/login']" type="button" class="btn btn-success btn-sm">登录</button>
                 </li>
-                <li class="nav-item">
-                    <button  [routerLink]="['/register']" type="button" class="btn btn-warning btn-sm">注册</button>
+                <li class="nav-item" *ngIf="userInfo==null">
+                    <button [routerLink]="['/register']" type="button" class="btn btn-warning btn-sm">注册</button>
+                </li>
+                <li class="nav-item" *ngIf="userInfo!=null">
+                    <button [routerLink]="['/register']" type="button" class="btn btn-warning btn-sm">用户</button>
                 </li>
             </ul>
         </div>

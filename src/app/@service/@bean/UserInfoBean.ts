@@ -2,7 +2,8 @@ export class UserInfoBean {
 
     private permission: [string];
 
-    private sysUser: UserInfoBean.UserInfo;
+    private sysUser: UserInfo;
+
 }
 
 /**
@@ -11,16 +12,14 @@ export class UserInfoBean {
  * @date: 2019/5/20
  * @param:
  */
-namespace UserInfoBean {
-    export class UserInfo {
-        userId: number;
-        username: string;
-        password: string;
-        createTime: string;
-        updateTime: string;
-        phone: string;
-        avatar: string;
-        tenantId: number;
-        deptId: number;
-    }
+export class UserInfo {
+    userId: number;
+    username: string;
+    password: string;
+    createTime: string;
+    updateTime: string;
+    phone: string;
+    avatar: string;
+    tenantId: number;
+    deptId: number;
 }

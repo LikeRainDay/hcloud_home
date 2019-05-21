@@ -1,6 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, NavigationEnd, NavigationStart} from '@angular/router';
+import {Router, NavigationEnd, NavigationStart, ActivatedRoute} from '@angular/router';
 import {Location, PopStateEvent} from '@angular/common';
+import {observable, Observable} from 'rxjs';
+import {OAUTH_ACCESS_TOKEN} from '../../@common/Constant';
+import {ApiService} from '../../@service/api.service';
+import {BaseRequestResult} from '../../@service/@bean/BaseRequestResult';
+import {UserInfoBean} from '../../@service/@bean/UserInfoBean';
 
 @Component({
     selector: 'app-navbar',
@@ -9,14 +14,28 @@ import {Location, PopStateEvent} from '@angular/common';
 })
 export class NavbarComponent implements OnInit {
     public isCollapsed = true;
-    public isLogin = false;
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
 
-    constructor(public location: Location, private router: Router) {
+    public userInfo: UserInfoBean = null;
+
+    constructor(public location: Location,
+                private router: Router,
+                private activatedRoute: ActivatedRoute,
+                private service: ApiService) {
     }
 
     ngOnInit() {
+        const userInfo = this.service.getUserInfo();
+        userInfo.subscribe((info: BaseRequestResult<UserInfoBean>) => {
+            console.log(info);
+            if (info.code === 0) {
+                this.userInfo = info.data;
+            } else {
+                console.log('失败');
+            }
+        });
+
         this.router.events.subscribe((event) => {
             this.isCollapsed = true;
             if (event instanceof NavigationStart) {
@@ -35,14 +54,5 @@ export class NavbarComponent implements OnInit {
         this.location.subscribe((ev: PopStateEvent) => {
             this.lastPoppedUrl = ev.url;
         });
-
-        // 异步处理 查看用户是否登录过，如果用户登录 则进行相应的界面
-
-        // 进行获取用户的详细信息
-        // const userInfo = this.service.getUserInfo();
-        // userInfo.subscribe((info: any) => {
-        //     console.log(info);
-        //     //    用户成功跳转到首页 ， 并将首页的地址栏进行更换
-        // });
     }
 }

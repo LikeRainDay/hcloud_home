@@ -18,8 +18,9 @@ import {DocumentComponent} from './document/document.component';
 import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {TreeModule} from 'ng2-tree';
-import {LoginApiService} from './@service/login-api.service';
+import {ApiService} from './@service/api.service';
 import {BseInterceptorService} from './@service/@interceptor/base-interceptor.service';
+import {StorageServiceService} from './@service/storage-service.service';
 
 @NgModule({
     declarations: [
@@ -60,7 +61,8 @@ import {BseInterceptorService} from './@service/@interceptor/base-interceptor.se
         AppRoutingModule
     ],
     providers: [
-        LoginApiService,
+        StorageServiceService,
+        ApiService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: BseInterceptorService,
