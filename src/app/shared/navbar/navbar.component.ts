@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, NavigationEnd, NavigationStart, ActivatedRoute} from '@angular/router';
 import {Location, PopStateEvent} from '@angular/common';
-import {observable, Observable} from 'rxjs';
-import {OAUTH_ACCESS_TOKEN} from '../../@common/Constant';
-import {ApiService} from '../../@service/api.service';
-import {BaseRequestResult} from '../../@service/@bean/BaseRequestResult';
-import {UserInfoBean} from '../../@service/@bean/UserInfoBean';
+import {ApiService} from '../../@core/service/api.service';
+import {UserInfoBean} from '../../@core/data/UserInfoBean';
+import {BaseRequestResult} from '../../@core/data/BaseRequestResult';
 
 @Component({
     selector: 'app-navbar',

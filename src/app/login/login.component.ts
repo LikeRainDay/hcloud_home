@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../@service/api.service';
-import {TokenBean} from '../@common/ServiceBean';
-import {APP_TENANT_ID, APP_USER_ID, OAUTH_ACCESS_TOKEN, OAUTH_REFRSH_TOKEN} from '../@common/Constant';
-import {Location} from '@angular/common';
+import {ApiService} from '../@core/service/api.service';
 import {Router} from '@angular/router';
-import {BaseRequestResult} from '../@service/@bean/BaseRequestResult';
+import {TokenBean} from '../@core/data/ServiceBean';
+import {APP_TENANT_ID, APP_USER_ID, OAUTH_ACCESS_TOKEN, OAUTH_REFRSH_TOKEN} from '../@core/data/common/Constant';
 
 @Component({
     selector: 'app-login',

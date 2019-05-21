@@ -18,9 +18,9 @@ import {DocumentComponent} from './document/document.component';
 import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {TreeModule} from 'ng2-tree';
-import {ApiService} from './@service/api.service';
-import {BseInterceptorService} from './@service/@interceptor/base-interceptor.service';
-import {StorageServiceService} from './@service/storage-service.service';
+import {ApiService} from './@core/service/api.service';
+import {BseInterceptorService} from './@core/interceptor/base-interceptor.service';
+import {StorageServiceService} from './@core/utils/storage-service.service';
 
 @NgModule({
     declarations: [

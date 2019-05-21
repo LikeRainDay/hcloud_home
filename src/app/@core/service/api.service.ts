@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {JSEncrypt} from '../../jslibs/jsencrypt/jsencrypt';
-import {OAUTH_ACCESS_TOKEN} from '../@common/Constant';
+import {JSEncrypt} from '../../../jslibs/jsencrypt/jsencrypt';
+import {OAUTH_ACCESS_TOKEN} from '../../@common/Constant';
 
 const scope = 'server';
 const AUTHORIZATION = 'Basic aGNsb3VkOmhjbG91ZF9zZWN1cml0eQ==';
