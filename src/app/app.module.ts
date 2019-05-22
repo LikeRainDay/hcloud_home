@@ -4,24 +4,35 @@ import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app.routing';
-
 import {AppComponent} from './app.component';
 import {SignupComponent} from './signup/signup.component';
 import {LandingComponent} from './landing/landing.component';
 import {ProfileComponent} from './profile/profile.component';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {FooterComponent} from './shared/footer/footer.component';
-
 import {LoginComponent} from './login/login.component';
 import {PriceComponent} from './price/price.component';
 import {DocumentComponent} from './document/document.component';
 import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TreeModule} from 'ng2-tree';
-import {ApiService} from './@core/service/api.service';
-import {BseInterceptorService} from './@core/interceptor/base-interceptor.service';
-import {StorageService} from './@core/utils/storage.service';
 import {CoreModule} from './@core/core-modul.module';
+
+const MarkdownProperties = {
+    loader: HttpClient,
+    markedOptions: {
+        provide: MarkedOptions,
+        useValue: {
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false,
+        }
+    }
+};
 
 @NgModule({
     declarations: [
@@ -40,23 +51,7 @@ import {CoreModule} from './@core/core-modul.module';
         HttpClientModule,
         TreeModule,
         CoreModule.forRoot(),
-        MarkdownModule.forRoot(
-            {
-                loader: HttpClient,
-                markedOptions: {
-                    provide: MarkedOptions,
-                    useValue: {
-                        gfm: true,
-                        tables: true,
-                        breaks: false,
-                        pedantic: false,
-                        sanitize: false,
-                        smartLists: true,
-                        smartypants: false,
-                    }
-                }
-            }
-        ),
+        MarkdownModule.forRoot(MarkdownProperties),
         NgbModule.forRoot(),
         FormsModule,
         RouterModule,
