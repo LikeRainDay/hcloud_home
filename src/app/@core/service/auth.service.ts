@@ -3,7 +3,7 @@ import {AuthData, Token} from '../data/Auth.data';
 import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {StorageService} from '../utils/storage.service';
-import {OAUTH_ACCESS_TOKEN} from '../data/common/Constant';
+import {OAUTH_ACCESS_TOKEN} from '../data/common/constant.common';
 import {catchError} from 'rxjs/operators';
 import {EncrtyService} from '../utils/encrty.service';
 

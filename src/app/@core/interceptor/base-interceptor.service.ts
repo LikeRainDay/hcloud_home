@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
-import {OAUTH_ACCESS_TOKEN} from '../data/common/Constant';
+import {OAUTH_ACCESS_TOKEN} from '../data/common/constant.common';
 
 const BASE_URL = 'http://localhost:10000';
 
