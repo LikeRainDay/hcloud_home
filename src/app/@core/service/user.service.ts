@@ -3,6 +3,7 @@ import {User, UserData} from '../data/User.data';
 import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
+import {BaseRequestResult} from '../data/common/BaseRequestResult';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,7 @@ export class UserService extends UserData {
         super();
     }
 
-    getCurrentUser(): Observable<User> {
+    getCurrentUser(): Observable<BaseRequestResult<User>> {
         const url = '/admin/user/info';
         return this.http.get<any>(url).pipe(
             catchError(this.handleError('getUserInfo', []))

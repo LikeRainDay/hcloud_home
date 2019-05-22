@@ -1,11 +1,12 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ApiService} from '../api.service';
-import {UserInfoService} from '../user-info.service';
+import {AuthService} from '../auth.service';
+import {UserService} from '../user.service';
+
 
 const SERVICES = [
-    ApiService,
-    UserInfoService
+    AuthService,
+    UserService
 ];
 
 @NgModule({
