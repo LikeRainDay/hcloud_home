@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, NavigationEnd, NavigationStart, ActivatedRoute} from '@angular/router';
 import {Location, PopStateEvent} from '@angular/common';
-import {ApiService} from '../../@core/service/api.service';
-import {UserInfoBean} from '../../@core/data/UserInfoBean';
-import {BaseRequestResult} from '../../@core/data/BaseRequestResult';
+import {User, UserData} from '../../@core/data/User.data';
+import {BaseRequestResult} from '../../@core/data/common/BaseRequestResult';
 
 @Component({
     selector: 'app-navbar',
@@ -15,17 +14,17 @@ export class NavbarComponent implements OnInit {
     private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
 
-    public userInfo: UserInfoBean = null;
+    public userInfo: User = null;
 
     constructor(public location: Location,
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
-                private service: ApiService) {
+                private service: UserData) {
     }
 
     ngOnInit() {
-        const userInfo = this.service.getUserInfo();
-        userInfo.subscribe((info: BaseRequestResult<UserInfoBean>) => {
+        const userInfo = this.service.getCurrentUser();
+        userInfo.subscribe((info: BaseRequestResult<User>) => {
             console.log(info);
             if (info.code === 0) {
                 this.userInfo = info.data;

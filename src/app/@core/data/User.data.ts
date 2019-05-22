@@ -1,18 +1,13 @@
-export class UserInfoBean {
+import {Observable} from 'rxjs';
+import {BaseRequestResult} from './common/BaseRequestResult';
 
-    private permission: [string];
+export interface User {
+    permission: [string];
 
-    private sysUser: UserInfo;
-
+    sysUser: UserInfo;
 }
 
-/**
- * @des: 声明同一个作用域的内部类
- * @author: houshuai
- * @date: 2019/5/20
- * @param:
- */
-export class UserInfo {
+export interface UserInfo {
     userId: number;
     username: string;
     password: string;
@@ -23,3 +18,10 @@ export class UserInfo {
     tenantId: number;
     deptId: number;
 }
+
+
+export abstract class UserData {
+
+    abstract getCurrentUser(): Observable<BaseRequestResult<User>>;
+}
+

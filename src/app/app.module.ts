@@ -20,7 +20,8 @@ import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/h
 import {TreeModule} from 'ng2-tree';
 import {ApiService} from './@core/service/api.service';
 import {BseInterceptorService} from './@core/interceptor/base-interceptor.service';
-import {StorageServiceService} from './@core/utils/storage-service.service';
+import {StorageService} from './@core/utils/storage.service';
+import {CoreModule} from './@core/core-modul.module';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import {StorageServiceService} from './@core/utils/storage-service.service';
         BrowserModule,
         HttpClientModule,
         TreeModule,
+        CoreModule.forRoot(),
         MarkdownModule.forRoot(
             {
                 loader: HttpClient,
@@ -60,15 +62,7 @@ import {StorageServiceService} from './@core/utils/storage-service.service';
         RouterModule,
         AppRoutingModule
     ],
-    providers: [
-        StorageServiceService,
-        ApiService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: BseInterceptorService,
-            multi: true,
-        }
-    ],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {

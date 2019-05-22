@@ -1,9 +1,6 @@
-/**
- * @des: 服务相关的实体bean内容
- * @author: houshuai
- * @date: 2019/5/16
- */
-export interface TokenBean {
+import {Observable} from 'rxjs';
+
+export interface Token {
     access_token: string;
     refresh_token: string;
     expires_in: number;
@@ -15,27 +12,13 @@ export interface TokenBean {
     token_type: string;
     scope: string;
 }
-//
-// /**
-//  * @des: 基础相应接口
-//  * @author: houshuai
-//  * @date: 2019/5/20
-//  * @param:
-//  */
-// export interface BaseResonse<T> {
-//     code: number;
-//     msg: string;
-//     data: T;
-// }
-//
-// /**
-//  * @des: 用户基本信息
-//  * @author: houshuai
-//  * @date: 2019/5/20
-//  * @param:
-//  */
-// export interface UserInfoBean {
-//     sysUser: string;
-//
-//
-// }
+
+export abstract class AuthData {
+    abstract getTokenByPassword(username: string, password: string, code: string): Observable<Token>;
+
+    abstract getTokenByMobile(mobile: string, code: string): Observable<Token>;
+
+    abstract getTokenBySocial(state: string, code: string): Observable<Token>;
+
+    abstract getRefreshToken(refresh_token: string): Observable<Token>;
+}

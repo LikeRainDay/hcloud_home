@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../@core/service/api.service';
 import {Router} from '@angular/router';
-import {TokenBean} from '../@core/data/ServiceBean';
+import {AuthData, Token} from '../@core/data/Auth.data';
 import {APP_TENANT_ID, APP_USER_ID, OAUTH_ACCESS_TOKEN, OAUTH_REFRSH_TOKEN} from '../@core/data/common/Constant';
 
 @Component({
@@ -15,15 +14,15 @@ export class LoginComponent implements OnInit {
 
     inputIsError = false;
 
-    constructor(private service: ApiService, private router: Router) {
+    constructor(private service: AuthData, private router: Router) {
     }
 
     ngOnInit() {
     }
 
     login(account: string, password: string) {
-        const observable = this.service.loginByPassword(account, password, '11', '11');
-        observable.subscribe((data: TokenBean) => {
+        const observable = this.service.getTokenByPassword(account, password, '');
+        observable.subscribe((data: Token) => {
                 console.log(data);
                 sessionStorage.setItem(OAUTH_ACCESS_TOKEN, data.access_token);
                 sessionStorage.setItem(OAUTH_REFRSH_TOKEN, data.access_token);
