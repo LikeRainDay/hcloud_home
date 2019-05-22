@@ -23,17 +23,17 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
-        const userInfo = this.service.getCurrentUser();
-        userInfo.subscribe((info: BaseRequestResult<User>) => {
-            console.log(info);
-            if (info.code === 0) {
-                this.userInfo = info.data;
-            } else {
-                console.log('失败');
-            }
-        });
 
         this.router.events.subscribe((event) => {
+            const userInfo = this.service.getCurrentUser();
+            userInfo.subscribe((info: BaseRequestResult<User>) => {
+                console.log(info);
+                if (info.code === 0) {
+                    this.userInfo = info.data;
+                } else {
+                    console.log('失败');
+                }
+            });
             this.isCollapsed = true;
             if (event instanceof NavigationStart) {
                 if (event.url !== this.lastPoppedUrl) {

@@ -8,6 +8,7 @@ import {AuthData} from './data/Auth.data';
 import {AuthService} from './service/auth.service';
 import {UserData} from './data/User.data';
 import {EncrtyService} from './utils/encrty.service';
+import {UserService} from './service/user.service';
 
 const DATA_SERVICES = [
     {
@@ -16,7 +17,7 @@ const DATA_SERVICES = [
         multi: true
     },
     {provide: AuthData, useClass: AuthService},
-    {provide: UserData, useClass: UserData}
+    {provide: UserData, useClass: UserService}
 ];
 
 const CORE_PROVIDERS = [
