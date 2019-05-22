@@ -36,7 +36,7 @@ export class AuthService extends AuthData {
             scope: this.scope
         }, {
             headers: header
-        }).pipe(
+        }).debounceTime(2000).pipe(
             catchError(this.handleError('loginByMobile', []))
         );
     }
@@ -54,7 +54,7 @@ export class AuthService extends AuthData {
             grant_type: grant_type
         }, {
             headers: header
-        }).pipe(
+        }).debounceTime(2000).pipe(
             catchError(this.handleError('loginBySocial', []))
         );
     }
@@ -75,7 +75,7 @@ export class AuthService extends AuthData {
         return this.http.get<any>(
             `${url}?username=${username}&password=${urlEncode}&code=${code}&grant_type=${grant_type}&scope=${this.scope}`, {
                 headers: header
-            }).pipe(
+            }).debounceTime(2000).pipe(
             catchError(this.handleError('loginByPassword', []))
         );
     }
