@@ -37,7 +37,9 @@ export class UserService extends UserData {
     isLogin(): boolean {
         let isLogin = false;
         this.currentUser.subscribe(res => {
-            isLogin = res.code === 0;
+            if (res) {
+                isLogin = res.code === 0;
+            }
         });
         return isLogin;
     }

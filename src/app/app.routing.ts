@@ -11,12 +11,13 @@ import {DocumentComponent} from './document/document.component';
 import {PriceComponent} from './price/price.component';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {AppComponent} from './app.component';
+import {AuthGuard} from './@core/auth/auth.guard';
 
 const routes: Routes = [
     {path: 'home', component: LandingComponent},
     {path: 'user-profile', component: ProfileComponent},
     {path: 'price', component: PriceComponent},
-    {path: 'document', component: DocumentComponent},
+    {path: 'document', component: DocumentComponent, canActivate: [AuthGuard]},
     {path: 'register', component: SignupComponent},
     {path: 'landing', component: LandingComponent},
     {path: 'login', component: LoginComponent},
