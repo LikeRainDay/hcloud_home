@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../@core/service/user.service';
 
 @Component({
     selector: 'app-landing',
@@ -7,11 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class LandingComponent implements OnInit {
-  focus: any;
-  focus1: any;
+    focus: any;
+    focus1: any;
 
-  constructor() { }
+    constructor(private service: UserService) {
+    }
 
-  ngOnInit() {}
+    ngOnInit() {
+        this.service.getCurrentUser();
+        this.service.currentUser.subscribe(res => {
+            console.log(res);
+        });
+    }
 
 }

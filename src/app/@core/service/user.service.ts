@@ -1,24 +1,45 @@
 import {Injectable} from '@angular/core';
 import {User, UserData} from '../data/User.data';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {catchError} from 'rxjs/operators';
 import {BaseRequestResult} from '../data/common/BaseRequestResult';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService extends UserData {
 
+    public currentUser: Observable<any>;
+
+    private currentUserSubject: BehaviorSubject<User>;
+
     constructor(private  http: HttpClient) {
         super();
+        this.currentUserSubject = new BehaviorSubject<User>(null);
+        this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    getCurrentUser(): Observable<BaseRequestResult<User>> {
+    getCurrentUser() {
+        const url = '/admin/user/info';
+        this.http.get<any>(url).subscribe(res => {
+            this.currentUserSubject.next(res);
+        });
+    }
+
+    getCurrentUserInfo(): Observable<BaseRequestResult<User>> {
         const url = '/admin/user/info';
         return this.http.get<any>(url).pipe(
             catchError(this.handleError('getUserInfo', []))
         );
+    }
+
+    isLogin(): boolean {
+        let isLogin = false;
+        this.currentUser.subscribe(res => {
+            isLogin = res.code === 0;
+        });
+        return isLogin;
     }
 
     /**

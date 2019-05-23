@@ -9,6 +9,7 @@ import {AuthService} from './service/auth.service';
 import {UserData} from './data/User.data';
 import {EncrtyService} from './utils/encrty.service';
 import {UserService} from './service/user.service';
+import {AuthGuard} from './auth/auth.guard';
 
 const DATA_SERVICES = [
     {
@@ -24,6 +25,7 @@ const CORE_PROVIDERS = [
     ...ServiceModule.forRoot().providers,
     StorageService,
     EncrtyService,
+    AuthGuard,
     ...DATA_SERVICES
 ];
 

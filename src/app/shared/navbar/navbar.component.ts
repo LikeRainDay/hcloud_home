@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, NavigationEnd, NavigationStart, ActivatedRoute} from '@angular/router';
+import {Router, NavigationEnd, NavigationStart} from '@angular/router';
 import {Location, PopStateEvent} from '@angular/common';
-import {User, UserData} from '../../@core/data/User.data';
-import {BaseRequestResult} from '../../@core/data/common/BaseRequestResult';
+import {User} from '../../@core/data/User.data';
+import {UserService} from '../../@core/service/user.service';
 
 @Component({
     selector: 'app-navbar',
@@ -18,22 +18,12 @@ export class NavbarComponent implements OnInit {
 
     constructor(public location: Location,
                 private router: Router,
-                private activatedRoute: ActivatedRoute,
-                private service: UserData) {
+                private userService: UserService) {
+
     }
 
     ngOnInit() {
-
         this.router.events.subscribe((event) => {
-            const userInfo = this.service.getCurrentUser();
-            userInfo.subscribe((info: BaseRequestResult<User>) => {
-                console.log(info);
-                if (info.code === 0) {
-                    this.userInfo = info.data;
-                } else {
-                    console.log('失败');
-                }
-            });
             this.isCollapsed = true;
             if (event instanceof NavigationStart) {
                 if (event.url !== this.lastPoppedUrl) {
@@ -46,6 +36,9 @@ export class NavbarComponent implements OnInit {
                 } else {
                     window.scrollTo(0, 0);
                 }
+                this.userService.currentUser.subscribe(res => {
+                    this.userInfo = res;
+                });
             }
         });
         this.location.subscribe((ev: PopStateEvent) => {

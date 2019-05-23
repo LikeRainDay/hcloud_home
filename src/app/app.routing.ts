@@ -9,6 +9,8 @@ import {LandingComponent} from './landing/landing.component';
 import {LoginComponent} from './login/login.component';
 import {DocumentComponent} from './document/document.component';
 import {PriceComponent} from './price/price.component';
+import {NavbarComponent} from './shared/navbar/navbar.component';
+import {AppComponent} from './app.component';
 
 const routes: Routes = [
     {path: 'home', component: LandingComponent},
@@ -18,6 +20,7 @@ const routes: Routes = [
     {path: 'register', component: SignupComponent},
     {path: 'landing', component: LandingComponent},
     {path: 'login', component: LoginComponent},
+    {path: 'nav', component: NavbarComponent},
     {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

@@ -22,6 +22,8 @@ export interface UserInfo {
 
 export abstract class UserData {
 
-    abstract getCurrentUser(): Observable<BaseRequestResult<User>>;
+    abstract getCurrentUserInfo(): Observable<BaseRequestResult<User>>;
+
+    abstract isLogin(): boolean;
 }
 

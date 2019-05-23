@@ -1,16 +1,20 @@
 import {Injectable} from '@angular/core';
 import {AuthData, Token} from '../data/Auth.data';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {StorageService} from '../utils/storage.service';
-import {OAUTH_ACCESS_TOKEN} from '../data/common/constant.common';
-import {catchError} from 'rxjs/operators';
+import {APP_TENANT_ID, APP_USER_ID, OAUTH_ACCESS_TOKEN, OAUTH_REFRSH_TOKEN} from '../data/common/constant.common';
+import {catchError, map} from 'rxjs/operators';
 import {EncrtyService} from '../utils/encrty.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService extends AuthData {
+
+    private currentTokenSubject: BehaviorSubject<any>;
+
+    public token: Observable<Token>;
 
     scope = 'server';
 
@@ -20,6 +24,8 @@ export class AuthService extends AuthData {
                 private stroage: StorageService,
                 private  encrty: EncrtyService) {
         super();
+        this.currentTokenSubject = new BehaviorSubject<any>(null);
+        this.token = this.currentTokenSubject.asObservable();
     }
 
     getTokenByMobile(mobile: string, code: string): Observable<Token> {
@@ -36,7 +42,14 @@ export class AuthService extends AuthData {
             scope: this.scope
         }, {
             headers: header
-        }).debounceTime(2000).pipe(
+        }).pipe(map(res => {
+                sessionStorage.setItem(OAUTH_ACCESS_TOKEN, res.access_token);
+                sessionStorage.setItem(OAUTH_REFRSH_TOKEN, res.access_token);
+                sessionStorage.setItem(APP_USER_ID, String(res.user_id));
+                sessionStorage.setItem(APP_TENANT_ID, String(res.tenant_id));
+                this.currentTokenSubject.next(res);
+                return res;
+            }),
             catchError(this.handleError('loginByMobile', []))
         );
     }
@@ -54,7 +67,14 @@ export class AuthService extends AuthData {
             grant_type: grant_type
         }, {
             headers: header
-        }).debounceTime(2000).pipe(
+        }).pipe(map(res => {
+                sessionStorage.setItem(OAUTH_ACCESS_TOKEN, res.access_token);
+                sessionStorage.setItem(OAUTH_REFRSH_TOKEN, res.access_token);
+                sessionStorage.setItem(APP_USER_ID, String(res.user_id));
+                sessionStorage.setItem(APP_TENANT_ID, String(res.tenant_id));
+                this.currentTokenSubject.next(res);
+                return res;
+            }),
             catchError(this.handleError('loginBySocial', []))
         );
     }
@@ -75,9 +95,20 @@ export class AuthService extends AuthData {
         return this.http.get<any>(
             `${url}?username=${username}&password=${urlEncode}&code=${code}&grant_type=${grant_type}&scope=${this.scope}`, {
                 headers: header
-            }).debounceTime(2000).pipe(
+            }).pipe(map(res => {
+                this.SetTokenToSession(res);
+                this.currentTokenSubject.next(res);
+                return res;
+            }),
             catchError(this.handleError('loginByPassword', []))
         );
+    }
+
+    SetTokenToSession(res) {
+        sessionStorage.setItem(OAUTH_ACCESS_TOKEN, res.access_token);
+        sessionStorage.setItem(OAUTH_REFRSH_TOKEN, res.refresh_token);
+        sessionStorage.setItem(APP_USER_ID, String(res.user_id));
+        sessionStorage.setItem(APP_TENANT_ID, String(res.tenant_id));
     }
 
     /**
