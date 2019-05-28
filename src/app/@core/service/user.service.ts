@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {BaseRequestResult} from '../data/common/BaseRequestResult';
 import {catchError} from 'rxjs/operators';
+import {APP_TENANT_ID, APP_USER_ID, OAUTH_ACCESS_TOKEN, OAUTH_REFRSH_TOKEN} from '../data/common/constant.common';
 
 @Injectable({
     providedIn: 'root'
@@ -49,6 +50,7 @@ export class UserService extends UserData {
         this.http.delete<any>(url).subscribe(res => {
             if (res.code === 0) {
                 this.currentUserSubject.next(null);
+                this.clearTokenToSession();
             } else {
                 console.log('登出失败');
             }
@@ -59,6 +61,14 @@ export class UserService extends UserData {
         // TODO 注册相关
         return undefined;
     }
+
+    clearTokenToSession() {
+        sessionStorage.removeItem(OAUTH_ACCESS_TOKEN);
+        sessionStorage.removeItem(OAUTH_REFRSH_TOKEN);
+        sessionStorage.removeItem(APP_USER_ID);
+        sessionStorage.removeItem(APP_TENANT_ID);
+    }
+
 
     /**
      * Handle Http operation that failed.

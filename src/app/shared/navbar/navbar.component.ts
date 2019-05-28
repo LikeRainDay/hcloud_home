@@ -39,6 +39,8 @@ export class NavbarComponent implements OnInit {
                 this.userService.currentUser.subscribe(res => {
                     if (res) {
                         this.userInfo = res.data;
+                    } else {
+                        this.userInfo = null;
                     }
                 });
             }

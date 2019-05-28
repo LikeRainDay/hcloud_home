@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../@core/service/user.service';
 import {PlatformLocation} from '@angular/common';
-import {UrlService} from '../@core/utils/url.service';
 import {StorageService} from '../@core/utils/storage.service';
-import {APP_SOCIAL_TYPE} from '../@core/data/common/constant.common';
 import {AuthService} from '../@core/service/auth.service';
 import {ActivatedRoute} from '@angular/router';
 
@@ -21,8 +19,7 @@ export class LandingComponent implements OnInit {
                 private auth: AuthService,
                 private location: PlatformLocation,
                 private storage: StorageService,
-                private route: ActivatedRoute,
-                private urlUtils: UrlService) {
+                private route: ActivatedRoute) {
 
     }
 
