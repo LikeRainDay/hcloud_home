@@ -22,7 +22,6 @@ export class BseInterceptorService implements HttpInterceptor {
             headers: sessionStorage.hasOwnProperty(OAUTH_ACCESS_TOKEN)
                 ? req.headers.set('Authorization', `Bearer ${sessionStorage.getItem(OAUTH_ACCESS_TOKEN)}`) : req.headers
         });
-
         // send cloned request with header to the next handler.
         return next.handle(newReq)
             .pipe(

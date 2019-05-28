@@ -21,14 +21,14 @@ export class UserService extends UserData {
     }
 
     getCurrentUser() {
-        const url = '/admin/user/info';
+        const url = '/api/admin/user/info';
         this.http.get<any>(url).subscribe(res => {
             this.currentUserSubject.next(res);
         });
     }
 
     getCurrentUserInfo(): Observable<BaseRequestResult<User>> {
-        const url = '/admin/user/info';
+        const url = '/api/admin/user/info';
         return this.http.get<any>(url).pipe(
             catchError(this.handleError('getUserInfo', []))
         );
@@ -45,7 +45,7 @@ export class UserService extends UserData {
     }
 
     logOut() {
-        const url = '/auth/token/logout';
+        const url = '/api/auth/token/logout';
         this.http.delete<any>(url).subscribe(res => {
             if (res.code === 0) {
                 this.currentUserSubject.next(null);

@@ -1,17 +1,11 @@
 {
-  "/auth/*": {
-    "target": "http://localhost:10000/auth",
+  "/api/*": {
+    "target": "http://localhost:10000",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
     "pathRewrite": {
-      "^/auth": ""
+      "^/api": ""
     }
-  },
-  "/admin/*": {
-    "target": "http://localhost:10000",
-    "secure": false,
-    "logLevel": "debug",
-    "changeOrigin": true
   }
 }

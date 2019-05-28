@@ -29,7 +29,7 @@ export class AuthService extends AuthData {
     }
 
     getTokenByMobile(mobile: string, code: string): Observable<Token> {
-        const url = '/auth/mobile/token/sms';
+        const url = '/api/auth/mobile/token/sms';
         const grant_type = 'mobile';
         const header = new HttpHeaders();
         header.set('isToken', 'false');
@@ -55,13 +55,17 @@ export class AuthService extends AuthData {
     }
 
     getTokenBySocial(state: string, code: string): Observable<Token> {
-        const url = '/auth/mobile/token/social';
+        const url = '/api/auth/mobile/token/social';
         const grant_type = 'mobile';
         const header = new HttpHeaders()
             .set('isToken', 'false')
             .set('Authorization', this.AUTHORIZATION)
             .set('TENANT_ID', '1');
-        return this.http.get<any>(`${url}?mobile=${state + '@' + code}&scope=${this.scope}&grant_type=${grant_type}`, {
+        const formData = new FormData();
+        formData.set('mobile', state + '@' + code);
+        formData.set('grant_type', grant_type);
+        formData.set('scope', this.scope);
+        return this.http.post<any>(url, formData, {
             headers: header
         }).pipe(map(res => {
                 sessionStorage.setItem(OAUTH_ACCESS_TOKEN, res.access_token);
@@ -81,7 +85,7 @@ export class AuthService extends AuthData {
 
     getTokenByPassword(username: string, password: string, code: string): Observable<Token> {
         this.stroage.removeItemFromSessionStorage(OAUTH_ACCESS_TOKEN);
-        const url = '/auth/oauth/token';
+        const url = '/api/auth/oauth/token';
         const grant_type = 'password';
         const urlEncode = encodeURIComponent(this.encrty.encryptClick(password));
         const header = new HttpHeaders()
