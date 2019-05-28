@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {User, UserData} from '../data/User.data';
+import {RegisterUserInfo, User, UserData} from '../data/User.data';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {BaseRequestResult} from '../data/common/BaseRequestResult';
@@ -57,8 +57,8 @@ export class UserService extends UserData {
         });
     }
 
-    register(): Observable<BaseRequestResult<User>> {
-        // TODO 注册相关
+    register(registerInfo: RegisterUserInfo): Observable<BaseRequestResult<User>> {
+        // TODO 用户注册接口
         return undefined;
     }
 
