@@ -22,8 +22,8 @@ const routes: Routes = [
     {
         path: 'register', component: SignupComponent, children: [
             {path: '', component: AccountComponent},
-            {path: 'registerByPassword/phone', component: PhoneComponent},
-            {path: 'registerByPassword/account', component: AccountComponent}
+            {path: 'account', component: AccountComponent},
+            {path: 'phone', component: PhoneComponent}
         ]
     },
     {path: 'landing', component: LandingComponent},

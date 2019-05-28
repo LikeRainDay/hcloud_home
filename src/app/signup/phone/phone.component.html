@@ -1,6 +1,6 @@
 <div class="card-body px-lg-5 py-lg-5">
     <div class="text-center text-muted mb-4">
-        <small>注册账号 ---01</small>
+        <small>手机注册</small>
     </div>
     <form role="form">
         <div class="form-group" [ngClass]="{'focused':focus===true}">
@@ -8,15 +8,20 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                 </div>
-                <input class="form-control" placeholder="姓名" type="text" (focus)="focus=true" (blur)="focus=false">
+                <input name="phone" [(ngModel)]="registerUserInfo.phone" class="form-control" placeholder="手机号"
+                       type="text" (focus)="focus=true" (blur)="focus=false">
             </div>
         </div>
         <div class="form-group" [ngClass]="{'focused':focus1===true}">
-            <div class="input-group input-group-alternative mb-3">
+            <div class="input-group input-group-alternative mb-2">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" placeholder="邮箱" type="email" (focus)="focus1=true" (blur)="focus1=false">
+                <input name="code" [(ngModel)]="registerUserInfo.code" class="form-control" placeholder="验证码"
+                       type="number" (focus)="focus1=true" (blur)="focus1=false">
+            </div>
+            <div class="md-1">
+                <button type="button" class="btn btn-primary mt-2">验证</button>
             </div>
         </div>
         <div class="form-group" [ngClass]="{'focused':focus2===true}">
@@ -24,7 +29,8 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="密码" type="password" (focus)="focus2=true"
+                <input name="password" [(ngModel)]="registerUserInfo.password" class="form-control" placeholder="密码"
+                       type="password" (focus)="focus2=true"
                        (blur)="focus2=false">
             </div>
         </div>

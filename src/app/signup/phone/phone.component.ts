@@ -9,7 +9,11 @@ import {RegisterUserInfo} from '../../@core/data/User.data';
 })
 export class PhoneComponent implements OnInit {
 
-    registerUserInfo: RegisterUserInfo;
+    registerUserInfo: RegisterUserInfo = <RegisterUserInfo>{
+        code: '',
+        password: '',
+        phone: ''
+    };
 
     constructor(private userService: UserService) {
     }
