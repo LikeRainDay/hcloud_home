@@ -10,6 +10,8 @@ import {DocumentComponent} from './document/document.component';
 import {PriceComponent} from './price/price.component';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {AuthGuard} from './@core/auth/auth.guard';
+import {PhoneComponent} from './signup/phone/phone.component';
+import {AccountComponent} from './signup/account/account.component';
 
 const routes: Routes = [
     {path: 'home', component: LandingComponent},
@@ -17,7 +19,13 @@ const routes: Routes = [
     {path: 'user-profile', component: ProfileComponent},
     {path: 'price', component: PriceComponent},
     {path: 'document', component: DocumentComponent, canActivate: [AuthGuard]},
-    {path: 'register', component: SignupComponent},
+    {
+        path: 'register', component: SignupComponent, children: [
+            {path: '', component: AccountComponent},
+            {path: 'register/phone', component: PhoneComponent},
+            {path: 'register/account', component: AccountComponent}
+        ]
+    },
     {path: 'landing', component: LandingComponent},
     {path: 'login', component: LoginComponent},
     {path: 'nav', component: NavbarComponent},
