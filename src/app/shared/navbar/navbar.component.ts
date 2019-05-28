@@ -37,7 +37,9 @@ export class NavbarComponent implements OnInit {
                     window.scrollTo(0, 0);
                 }
                 this.userService.currentUser.subscribe(res => {
-                    this.userInfo = res;
+                    if (res) {
+                        this.userInfo = res.data;
+                    }
                 });
             }
         });

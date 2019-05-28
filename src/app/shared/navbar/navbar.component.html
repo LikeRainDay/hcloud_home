@@ -44,7 +44,7 @@
                 </li>
                 <li class="nav-item dropdown" *ngIf="userInfo!=null">
                     <div ngbDropdown class="d-inline-block">
-                        <img class="imgCircle" src="assets/img/theme/team-1-800x800.jpg"
+                        <img class="imgCircle" src="{{userInfo.sysUser.avatar}}"
                              id="dropdownMenu1" ngbDropdownToggle>
                         <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             <button class="dropdown-item">个人信息</button>
