@@ -21,6 +21,11 @@ export class UserService extends UserData {
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
+    /**
+     * @des 获取当前用户信息 存放到全局的观察者
+     * @author houshuai
+     * @date 2019/5/29
+     */
     getCurrentUser() {
         const url = '/api/admin/user/info';
         this.http.get<any>(url).subscribe(res => {
@@ -28,6 +33,11 @@ export class UserService extends UserData {
         });
     }
 
+    /**
+     * @des 获取当前用户的信息  返回观察者
+     * @author houshuai
+     * @date 2019/5/29
+     */
     getCurrentUserInfo(): Observable<BaseRequestResult<User>> {
         const url = '/api/admin/user/info';
         return this.http.get<any>(url).pipe(
@@ -57,18 +67,31 @@ export class UserService extends UserData {
         });
     }
 
-    register(registerInfo: RegisterUserInfo): Observable<BaseRequestResult<User>> {
-        // TODO 用户注册接口
-        return undefined;
+    /**
+     * @des 账号密码形式注册
+     * @author houshuai
+     * @date 2019/5/29
+     * @param registerInfo 注册信息
+     */
+    registerByPassword(registerInfo: RegisterUserInfo): Observable<any> {
+        const url = '/api/admin/user/password/add';
+        return this.http.post<any>(url, registerInfo).pipe(
+            catchError(this.handleError('loginByMobile', []))
+        );
     }
 
-    clearTokenToSession() {
-        sessionStorage.removeItem(OAUTH_ACCESS_TOKEN);
-        sessionStorage.removeItem(OAUTH_REFRSH_TOKEN);
-        sessionStorage.removeItem(APP_USER_ID);
-        sessionStorage.removeItem(APP_TENANT_ID);
+    /**
+     * @des 电话号码注册
+     * @author houshuai
+     * @date 2019/5/29
+     * @param registerInfo 注册信息
+     */
+    registerByPhone(registerInfo: RegisterUserInfo): Observable<any> {
+        const url = '/api/admin/user/phone/add';
+        return this.http.post<any>(url, registerInfo).pipe(
+            catchError(this.handleError('loginByMobile', []))
+        );
     }
-
 
     /**
      * Handle Http operation that failed.
@@ -83,5 +106,17 @@ export class UserService extends UserData {
             // console.error(`${operation} failed: ${error.message}`);
             return of(result as T);
         };
+    }
+
+    /**
+     * @des 移除登出后的所有session存储的用户相关信息
+     * @author houshuai
+     * @date 2019/5/29
+     */
+    protected clearTokenToSession() {
+        sessionStorage.removeItem(OAUTH_ACCESS_TOKEN);
+        sessionStorage.removeItem(OAUTH_REFRSH_TOKEN);
+        sessionStorage.removeItem(APP_USER_ID);
+        sessionStorage.removeItem(APP_TENANT_ID);
     }
 }

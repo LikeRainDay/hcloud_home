@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../@core/service/user.service';
+import {RegisterUserInfo} from '../../@core/data/User.data';
 
 @Component({
-  selector: 'app-phone',
-  templateUrl: './phone.component.html',
-  styleUrls: ['./phone.component.css']
+    selector: 'app-phone',
+    templateUrl: './phone.component.html',
+    styleUrls: ['./phone.component.scss']
 })
 export class PhoneComponent implements OnInit {
 
-  constructor() { }
+    registerUserInfo: RegisterUserInfo;
 
-  ngOnInit() {
-  }
+    constructor(private userService: UserService) {
+    }
 
+    ngOnInit() {
+    }
+
+    registerByPhone() {
+        console.log('---手机号注册--');
+    }
 }

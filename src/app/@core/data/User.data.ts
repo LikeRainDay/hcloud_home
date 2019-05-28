@@ -21,9 +21,10 @@ export interface UserInfo {
 
 export interface RegisterUserInfo {
     username: string;
-    password: string;
+    password: string | null;
     code: string;
-    email: string;
+    email: string | null;
+    phone: string | null;
 }
 
 
@@ -33,6 +34,8 @@ export abstract class UserData {
 
     abstract isLogin(): boolean;
 
-    abstract register(registerInfo: RegisterUserInfo): Observable<BaseRequestResult<User>>;
+    abstract registerByPassword(registerInfo: RegisterUserInfo): Observable<any>;
+
+    abstract registerByPhone(registerInfo: RegisterUserInfo): Observable<any>;
 }
 
