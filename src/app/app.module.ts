@@ -17,6 +17,8 @@ import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TreeModule} from 'ng2-tree';
 import {CoreModule} from './@core/core-modul.module';
+import { PhoneComponent } from './signup/phone/phone.component';
+import { AccountComponent } from './signup/account/account.component';
 
 const MarkdownProperties = {
     loader: HttpClient,
@@ -44,7 +46,9 @@ const MarkdownProperties = {
         FooterComponent,
         LoginComponent,
         PriceComponent,
-        DocumentComponent
+        DocumentComponent,
+        PhoneComponent,
+        AccountComponent
     ],
     imports: [
         BrowserModule,
