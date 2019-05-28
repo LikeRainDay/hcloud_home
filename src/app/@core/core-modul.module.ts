@@ -10,6 +10,8 @@ import {UserData} from './data/User.data';
 import {EncrtyService} from './utils/encrty.service';
 import {UserService} from './service/user.service';
 import {AuthGuard} from './auth/auth.guard';
+import {WindowService} from './utils/window.service';
+import {UrlService} from './utils/url.service';
 
 const DATA_SERVICES = [
     {
@@ -26,6 +28,8 @@ const CORE_PROVIDERS = [
     StorageService,
     EncrtyService,
     AuthGuard,
+    WindowService,
+    UrlService,
     ...DATA_SERVICES
 ];
 

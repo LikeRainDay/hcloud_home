@@ -42,8 +42,15 @@
                 <li class="nav-item" *ngIf="userInfo==null">
                     <button [routerLink]="['/register']" type="button" class="btn btn-warning btn-sm">注册</button>
                 </li>
-                <li class="nav-item" *ngIf="userInfo!=null">
-                    <button [routerLink]="['/register']" type="button" class="btn btn-warning btn-sm">用户</button>
+                <li class="nav-item dropdown" *ngIf="userInfo!=null">
+                    <div ngbDropdown class="d-inline-block">
+                        <img class="imgCircle" src="assets/img/theme/team-1-800x800.jpg"
+                             id="dropdownMenu1" ngbDropdownToggle>
+                        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <button class="dropdown-item">个人信息</button>
+                            <button class="dropdown-item" (click)="logout()">登出</button>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>

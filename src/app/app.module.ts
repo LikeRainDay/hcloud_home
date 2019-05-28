@@ -52,7 +52,7 @@ const MarkdownProperties = {
         TreeModule,
         CoreModule.forRoot(),
         MarkdownModule.forRoot(MarkdownProperties),
-        NgbModule.forRoot(),
+        NgbModule,
         FormsModule,
         RouterModule,
         AppRoutingModule

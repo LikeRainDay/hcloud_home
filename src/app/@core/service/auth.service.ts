@@ -57,15 +57,11 @@ export class AuthService extends AuthData {
     getTokenBySocial(state: string, code: string): Observable<Token> {
         const url = '/auth/mobile/token/social';
         const grant_type = 'mobile';
-        const header = new HttpHeaders();
-        header.set('isToken', 'false');
-        header.set('TENANT_ID', '1');
-        header.set('Authorization', this.AUTHORIZATION);
-        return this.http.post<any>(url, {
-            mobile: state + '@' + code,
-            scope: this.scope,
-            grant_type: grant_type
-        }, {
+        const header = new HttpHeaders()
+            .set('isToken', 'false')
+            .set('Authorization', this.AUTHORIZATION)
+            .set('TENANT_ID', '1');
+        return this.http.get<any>(`${url}?mobile=${state + '@' + code}&scope=${this.scope}&grant_type=${grant_type}`, {
             headers: header
         }).pipe(map(res => {
                 sessionStorage.setItem(OAUTH_ACCESS_TOKEN, res.access_token);

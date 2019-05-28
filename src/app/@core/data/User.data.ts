@@ -25,5 +25,7 @@ export abstract class UserData {
     abstract getCurrentUserInfo(): Observable<BaseRequestResult<User>>;
 
     abstract isLogin(): boolean;
+
+    abstract register(): Observable<BaseRequestResult<User>>;
 }
 

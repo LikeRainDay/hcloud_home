@@ -44,6 +44,22 @@ export class UserService extends UserData {
         return isLogin;
     }
 
+    logOut() {
+        const url = '/auth/token/logout';
+        this.http.delete<any>(url).subscribe(res => {
+            if (res.code === 0) {
+                this.currentUserSubject.next(null);
+            } else {
+                console.log('登出失败');
+            }
+        });
+    }
+
+    register(): Observable<BaseRequestResult<User>> {
+        // TODO 注册相关
+        return undefined;
+    }
+
     /**
      * Handle Http operation that failed.
      * Let the app continue.

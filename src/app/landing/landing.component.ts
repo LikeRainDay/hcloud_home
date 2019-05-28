@@ -1,5 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../@core/service/user.service';
+import {PlatformLocation} from '@angular/common';
+import {UrlService} from '../@core/utils/url.service';
+import {StorageService} from '../@core/utils/storage.service';
+import {APP_SOCIAL_TYPE} from '../@core/data/common/constant.common';
+import {AuthService} from '../@core/service/auth.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-landing',
@@ -11,14 +17,28 @@ export class LandingComponent implements OnInit {
     focus: any;
     focus1: any;
 
-    constructor(private service: UserService) {
+    constructor(private service: UserService,
+                private auth: AuthService,
+                private location: PlatformLocation,
+                private storage: StorageService,
+                private route: ActivatedRoute,
+                private urlUtils: UrlService) {
+
     }
 
     ngOnInit() {
-        this.service.getCurrentUser();
-        this.service.currentUser.subscribe(res => {
-            console.log(res);
-        });
+        this.route
+            .queryParams
+            .subscribe(params => {
+                const code = params['code'];
+                if (!code) {
+                    this.service.getCurrentUser();
+                } else {
+                    //    第三方登录
+                    this.auth.getTokenBySocial('QQ', code).subscribe(res => {
+                        console.log(`第三方登录结果为： ${res}`);
+                    });
+                }
+            });
     }
-
 }

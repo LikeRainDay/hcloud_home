@@ -45,4 +45,8 @@ export class NavbarComponent implements OnInit {
             this.lastPoppedUrl = ev.url;
         });
     }
+
+    logout() {
+        this.userService.logOut();
+    }
 }
