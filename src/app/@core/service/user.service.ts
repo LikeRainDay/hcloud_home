@@ -5,11 +5,12 @@ import {HttpClient} from '@angular/common/http';
 import {BaseRequestResult} from '../data/common/BaseRequestResult';
 import {catchError} from 'rxjs/operators';
 import {APP_TENANT_ID, APP_USER_ID, OAUTH_ACCESS_TOKEN, OAUTH_REFRSH_TOKEN} from '../data/common/constant.common';
+import {BaseService} from './base.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserService extends UserData {
+export class UserService extends UserData, BaseService {
 
     public currentUser: Observable<any>;
 
@@ -91,21 +92,6 @@ export class UserService extends UserData {
         return this.http.post<any>(url, registerInfo).pipe(
             catchError(this.handleError('loginByMobile', []))
         );
-    }
-
-    /**
-     * Handle Http operation that failed.
-     * Let the app continue.
-     * @param operation - name of the operation that failed
-     * @param result - optional value to return as the observable result
-     */
-    private handleError<T>(operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-            // log to console instead
-            console.error(error);
-            // console.error(`${operation} failed: ${error.message}`);
-            return of(result as T);
-        };
     }
 
     /**

@@ -6,11 +6,13 @@ import {StorageService} from '../utils/storage.service';
 import {APP_TENANT_ID, APP_USER_ID, OAUTH_ACCESS_TOKEN, OAUTH_REFRSH_TOKEN} from '../data/common/constant.common';
 import {catchError, map} from 'rxjs/operators';
 import {EncrtyService} from '../utils/encrty.service';
+import {UserData} from '../data/User.data';
+import {BaseService} from './base.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService extends AuthData {
+export class AuthService extends AuthData, BaseService {
 
     private currentTokenSubject: BehaviorSubject<any>;
 
@@ -109,20 +111,5 @@ export class AuthService extends AuthData {
         sessionStorage.setItem(OAUTH_REFRSH_TOKEN, res.refresh_token);
         sessionStorage.setItem(APP_USER_ID, String(res.user_id));
         sessionStorage.setItem(APP_TENANT_ID, String(res.tenant_id));
-    }
-
-    /**
-     * Handle Http operation that failed.
-     * Let the app continue.
-     * @param operation - name of the operation that failed
-     * @param result - optional value to return as the observable result
-     */
-    private handleError<T>(operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-            // log to console instead
-            console.error(error);
-            // console.error(`${operation} failed: ${error.message}`);
-            return of(result as T);
-        };
     }
 }
