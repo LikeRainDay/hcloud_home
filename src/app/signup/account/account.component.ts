@@ -12,7 +12,7 @@ export class AccountComponent implements OnInit {
     registerUserInfo: RegisterUserInfo = <RegisterUserInfo>{
         username: '',
         password: '',
-        email: ''
+        code: ''
     };
 
     constructor(private userService: UserService) {

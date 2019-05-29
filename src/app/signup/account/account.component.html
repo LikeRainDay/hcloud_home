@@ -13,17 +13,17 @@
                        (focus)="focus=true" (blur)="focus=false">
             </div>
         </div>
-        <div class="form-group" [ngClass]="{'focused':focus1===true}">
-            <div class="input-group input-group-alternative mb-3">
+        <div class="form-inline" [ngClass]="{'focused':focus1===true}">
+            <div class="input-group input-group-alternative col-md-6">
                 <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    <span class="input-group-text"><i class="ni ni-image"></i></span>
                 </div>
-                <input name="email" [(ngModel)]="registerUserInfo.email" class="form-control" placeholder="邮箱"
-                       type="email"
-                       (focus)="focus1=true" (blur)="focus1=false">
+                <input name="code" [(ngModel)]="registerUserInfo.code" class="form-control" placeholder="验证码"
+                       type="text" (focus)="focus1=true" (blur)="focus1=false">
             </div>
+            <button type="button" class="btn btn-primary offset-md-1 col-md-auto"></button>
         </div>
-        <div class="form-group" [ngClass]="{'focused':focus2===true}">
+        <div class="form-group" style="margin-top: 10px" [ngClass]="{'focused':focus2===true}">
             <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
