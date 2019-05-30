@@ -51,6 +51,12 @@ export class NavbarComponent implements OnInit {
     }
 
     logout() {
-        this.userService.logOut();
+        this.userService.logOut().subscribe(res => {
+            if (res.code === 0) {
+                this.userInfo = null;
+            } else {
+                console.log('登出失败');
+            }
+        });
     }
 }

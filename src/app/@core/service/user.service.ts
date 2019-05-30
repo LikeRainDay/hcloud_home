@@ -3,7 +3,7 @@ import {RegisterUserInfo, User, UserData} from '../data/User.data';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {BaseRequestResult} from '../data/common/BaseRequestResult';
-import {catchError} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {APP_TENANT_ID, APP_USER_ID, OAUTH_ACCESS_TOKEN, OAUTH_REFRSH_TOKEN} from '../data/common/constant.common';
 
 @Injectable({
@@ -55,16 +55,16 @@ export class UserService extends UserData {
         return isLogin;
     }
 
-    logOut() {
+    logOut(): Observable<any> {
         const url = '/api/auth/token/logout';
-        this.http.delete<any>(url).subscribe(res => {
-            if (res.code === 0) {
-                this.currentUserSubject.next(null);
-                this.clearTokenToSession();
-            } else {
-                console.log('登出失败');
-            }
-        });
+        return this.http.delete<BaseRequestResult<any>>(url).pipe((map(res => {
+                if (res.code === 0) {
+                    this.currentUserSubject.next(null);
+                    this.clearTokenToSession();
+                }
+            })),
+            catchError(super.handleError('getUserInfo', []))
+        );
     }
 
     /**
@@ -74,7 +74,7 @@ export class UserService extends UserData {
      * @param registerInfo 注册信息
      */
     registerByPassword(registerInfo: RegisterUserInfo): Observable<any> {
-        const url = '/api/admin/user/password/add';
+        const url = '/api/admin/user/account/add';
         return this.http.post<any>(url, registerInfo).pipe(
             catchError(super.handleError('loginByMobile', []))
         );

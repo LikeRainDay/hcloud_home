@@ -35,7 +35,9 @@ export class LandingComponent implements OnInit {
                     //    第三方登录
                     // const social_qq = this.storage.getItemFromLocalStorage(APP_SOCIAL_TYPE);
                     this.auth.getTokenBySocial('QQ', code).subscribe(res => {
-                        console.log(`第三方登录结果为： ${res}`);
+                        if (res) {
+                            this.service.getCurrentUser();
+                        }
                     });
                 }
             });

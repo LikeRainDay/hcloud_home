@@ -26,6 +26,7 @@ export interface RegisterUserInfo {
     code: string;
     email: string | null;
     phone: string | null;
+    sessionId: string | null;
 }
 
 

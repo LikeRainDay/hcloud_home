@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../@core/service/user.service';
 import {RegisterUserInfo} from '../../@core/data/User.data';
-import {CaptureService} from '../../@core/service/capture.service';
+import {CaptureInfo, CaptureService} from '../../@core/service/capture.service';
 
 @Component({
     selector: 'app-account',
@@ -16,7 +16,7 @@ export class AccountComponent implements OnInit {
         code: ''
     };
 
-    picCapture: string;
+    picCapture: CaptureInfo;
 
     constructor(private userService: UserService,
                 private captureService: CaptureService) {
@@ -33,7 +33,11 @@ export class AccountComponent implements OnInit {
      */
     registerByPassword() {
         this.userService.registerByPassword(this.registerUserInfo).subscribe(res => {
-            console.log(res);
+            if (res.code === 0) {
+                console.log('登录失败');
+            } else {
+                console.log('登录失败');
+            }
         });
     }
 
@@ -45,6 +49,7 @@ export class AccountComponent implements OnInit {
     refreshCapture() {
         this.captureService.getPicCapture().subscribe(res => {
             this.picCapture = res;
+            this.registerUserInfo.sessionId = res.sessionId;
         });
     }
 }
