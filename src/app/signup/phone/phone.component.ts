@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../@core/service/user.service';
 import {RegisterUserInfo} from '../../@core/data/User.data';
+import {CaptureService} from '../../@core/service/capture.service';
 
 @Component({
     selector: 'app-phone',
@@ -15,13 +16,26 @@ export class PhoneComponent implements OnInit {
         phone: ''
     };
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService,
+                private captureService: CaptureService) {
     }
 
     ngOnInit() {
     }
 
     registerByPhone() {
-        console.log('---手机号注册--');
+        this.userService.registerByPhone(this.registerUserInfo).subscribe(res => {
+            console.log(res);
+        });
+    }
+
+    sendSmsCapture() {
+        this.captureService.sendSmsCapture(this.registerUserInfo.phone).subscribe(res => {
+            if (res.code === 0) {
+                // 发送成功
+            } else {
+                // 发送失败
+            }
+        });
     }
 }

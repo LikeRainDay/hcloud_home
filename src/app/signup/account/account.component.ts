@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../@core/service/user.service';
 import {RegisterUserInfo} from '../../@core/data/User.data';
+import {CaptureService} from '../../@core/service/capture.service';
 
 @Component({
     selector: 'app-account',
@@ -15,15 +16,35 @@ export class AccountComponent implements OnInit {
         code: ''
     };
 
-    constructor(private userService: UserService) {
+    picCapture = '';
+
+    constructor(private userService: UserService,
+                private captureService: CaptureService) {
     }
 
     ngOnInit() {
+        this.refreshCapture();
     }
 
+    /**
+     * @des 注册用户
+     * @author houshuai
+     * @date 2019/5/29
+     */
     registerByPassword() {
-        console.log('---账号密码注册--');
-        console.log(this.registerUserInfo);
-        console.log(this.registerUserInfo.password);
+        this.userService.registerByPassword(this.registerUserInfo).subscribe(res => {
+            console.log(res);
+        });
+    }
+
+    /**
+     * @des 刷新图片
+     * @author houshuai
+     * @date 2019/5/29
+     */
+    refreshCapture() {
+        this.captureService.getPicCapture().subscribe(res => {
+            this.picCapture = res.data;
+        });
     }
 }

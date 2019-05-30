@@ -12,6 +12,10 @@ import {UserService} from './service/user.service';
 import {AuthGuard} from './auth/auth.guard';
 import {WindowService} from './utils/window.service';
 import {UrlService} from './utils/url.service';
+import { PasswordDirective } from './directive/password.directive';
+import { AccountDirective } from './directive/account.directive';
+import { JsonPipe } from './pipe/json.pipe';
+import { DataPipe } from './pipe/data.pipe';
 
 const DATA_SERVICES = [
     {
@@ -36,7 +40,8 @@ const CORE_PROVIDERS = [
 @NgModule({
     imports: [
         CommonModule
-    ]
+    ],
+    declarations: [PasswordDirective, AccountDirective, JsonPipe, DataPipe]
 })
 export class CoreModule {
     static forRoot(): ModuleWithProviders {
