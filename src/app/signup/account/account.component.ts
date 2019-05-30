@@ -16,7 +16,7 @@ export class AccountComponent implements OnInit {
         code: ''
     };
 
-    picCapture = '';
+    picCapture: string;
 
     constructor(private userService: UserService,
                 private captureService: CaptureService) {
@@ -44,7 +44,7 @@ export class AccountComponent implements OnInit {
      */
     refreshCapture() {
         this.captureService.getPicCapture().subscribe(res => {
-            this.picCapture = res.data;
+            this.picCapture = res;
         });
     }
 }

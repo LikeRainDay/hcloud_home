@@ -1,5 +1,6 @@
 import {Observable} from 'rxjs';
 import {BaseRequestResult} from './common/BaseRequestResult';
+import {BaseService} from '../service/base.service';
 
 export interface User {
     permission: [string];
@@ -28,7 +29,7 @@ export interface RegisterUserInfo {
 }
 
 
-export abstract class UserData {
+export abstract class UserData extends BaseService {
 
     abstract getCurrentUserInfo(): Observable<BaseRequestResult<User>>;
 

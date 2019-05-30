@@ -6,13 +6,11 @@ import {StorageService} from '../utils/storage.service';
 import {APP_TENANT_ID, APP_USER_ID, OAUTH_ACCESS_TOKEN, OAUTH_REFRSH_TOKEN} from '../data/common/constant.common';
 import {catchError, map} from 'rxjs/operators';
 import {EncrtyService} from '../utils/encrty.service';
-import {UserData} from '../data/User.data';
-import {BaseService} from './base.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService extends AuthData, BaseService {
+export class AuthService extends AuthData {
 
     private currentTokenSubject: BehaviorSubject<any>;
 
@@ -52,7 +50,7 @@ export class AuthService extends AuthData, BaseService {
                 this.currentTokenSubject.next(res);
                 return res;
             }),
-            catchError(this.handleError('loginByMobile', []))
+            catchError(super.handleError('loginByMobile', []))
         );
     }
 
@@ -77,7 +75,7 @@ export class AuthService extends AuthData, BaseService {
                 this.currentTokenSubject.next(res);
                 return res;
             }),
-            catchError(this.handleError('loginBySocial', []))
+            catchError(super.handleError('loginBySocial', []))
         );
     }
 
@@ -102,7 +100,7 @@ export class AuthService extends AuthData, BaseService {
                 this.currentTokenSubject.next(res);
                 return res;
             }),
-            catchError(this.handleError('loginByPassword', []))
+            catchError(super.handleError('loginByPassword', []))
         );
     }
 

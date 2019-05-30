@@ -5,12 +5,11 @@ import {HttpClient} from '@angular/common/http';
 import {BaseRequestResult} from '../data/common/BaseRequestResult';
 import {catchError} from 'rxjs/operators';
 import {APP_TENANT_ID, APP_USER_ID, OAUTH_ACCESS_TOKEN, OAUTH_REFRSH_TOKEN} from '../data/common/constant.common';
-import {BaseService} from './base.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserService extends UserData, BaseService {
+export class UserService extends UserData {
 
     public currentUser: Observable<any>;
 
@@ -42,7 +41,7 @@ export class UserService extends UserData, BaseService {
     getCurrentUserInfo(): Observable<BaseRequestResult<User>> {
         const url = '/api/admin/user/info';
         return this.http.get<any>(url).pipe(
-            catchError(this.handleError('getUserInfo', []))
+            catchError(super.handleError('getUserInfo', []))
         );
     }
 
@@ -77,7 +76,7 @@ export class UserService extends UserData, BaseService {
     registerByPassword(registerInfo: RegisterUserInfo): Observable<any> {
         const url = '/api/admin/user/password/add';
         return this.http.post<any>(url, registerInfo).pipe(
-            catchError(this.handleError('loginByMobile', []))
+            catchError(super.handleError('loginByMobile', []))
         );
     }
 
@@ -90,7 +89,7 @@ export class UserService extends UserData, BaseService {
     registerByPhone(registerInfo: RegisterUserInfo): Observable<any> {
         const url = '/api/admin/user/phone/add';
         return this.http.post<any>(url, registerInfo).pipe(
-            catchError(this.handleError('loginByMobile', []))
+            catchError(super.handleError('loginByMobile', []))
         );
     }
 

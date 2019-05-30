@@ -1,4 +1,5 @@
 import {Observable} from 'rxjs';
+import {BaseService} from '../service/base.service';
 
 export interface Token {
     access_token: string;
@@ -13,7 +14,7 @@ export interface Token {
     scope: string;
 }
 
-export abstract class AuthData {
+export abstract class AuthData extends BaseService {
     abstract getTokenByPassword(username: string, password: string, code: string): Observable<Token>;
 
     abstract getTokenByMobile(mobile: string, code: string): Observable<Token>;
