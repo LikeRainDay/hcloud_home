@@ -6,15 +6,15 @@ import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app.routing';
 
 import {AppComponent} from './app.component';
-import {SignupComponent} from './signup/signup.component';
-import {LandingComponent} from './landing/landing.component';
-import {ProfileComponent} from './profile/profile.component';
-import {NavbarComponent} from './shared/navbar/navbar.component';
-import {FooterComponent} from './shared/footer/footer.component';
+import {SignupComponent} from './pages/signup/signup.component';
+import {LandingComponent} from './pages/landing/landing.component';
+import {ProfileComponent} from './pages/profile/profile.component';
+import {NavbarComponent} from './pages/shared/navbar/navbar.component';
+import {FooterComponent} from './pages/shared/footer/footer.component';
 
-import {LoginComponent} from './login/login.component';
-import {PriceComponent} from './price/price.component';
-import {DocumentComponent} from './document/document.component';
+import {LoginComponent} from './pages/login/login.component';
+import {PriceComponent} from './pages/price/price.component';
+import {DocumentComponent} from './pages/document/document.component';
 import {MarkdownModule, MarkedOptions} from 'ngx-markdown';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {TreeModule} from 'ng2-tree';
