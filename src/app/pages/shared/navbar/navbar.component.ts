@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, NavigationEnd, NavigationStart} from '@angular/router';
 import {Location, PopStateEvent} from '@angular/common';
-import {User} from '../../@core/data/User.data';
-import {UserService} from '../../@core/service/user.service';
+import {User} from '../../../@core/data/User.data';
+import {UserService} from '../../../@core/service/user.service';
 
 @Component({
     selector: 'app-navbar',

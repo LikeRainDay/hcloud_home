@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../@core/service/user.service';
-import {RegisterUserInfo} from '../../@core/data/User.data';
-import {CaptureService} from '../../@core/service/capture.service';
+import {UserService} from '../../../@core/service/user.service';
+import {RegisterUserInfo} from '../../../@core/data/User.data';
+import {CaptureService} from '../../../@core/service/capture.service';
 
 @Component({
     selector: 'app-phone',

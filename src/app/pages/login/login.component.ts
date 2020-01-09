@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthData, Token} from '../@core/data/Auth.data';
-import {WindowService} from '../@core/utils/window.service';
-import {APP_SOCIAL_TYPE, SocialType} from '../@core/data/common/constant.common';
-import {StorageService} from '../@core/utils/storage.service';
+import {AuthData, Token} from '../../@core/data/Auth.data';
+import {WindowService} from '../../@core/utils/window.service';
+import {APP_SOCIAL_TYPE, SocialType} from '../../@core/data/common/constant.common';
+import {StorageService} from '../../@core/utils/storage.service';
 
 interface Social {
     type: SocialType;

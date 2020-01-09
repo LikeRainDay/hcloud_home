@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../@core/service/user.service';
+import {UserService} from '../../@core/service/user.service';
 import {PlatformLocation} from '@angular/common';
-import {StorageService} from '../@core/utils/storage.service';
-import {AuthService} from '../@core/service/auth.service';
+import {StorageService} from '../../@core/utils/storage.service';
+import {AuthService} from '../../@core/service/auth.service';
 import {ActivatedRoute} from '@angular/router';
-import {APP_SOCIAL_TYPE} from '../@core/data/common/constant.common';
+import {APP_SOCIAL_TYPE} from '../../@core/data/common/constant.common';
 
 @Component({
     selector: 'app-landing',

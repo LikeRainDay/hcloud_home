@@ -2,16 +2,16 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {Routes, RouterModule} from '@angular/router';
-import {ProfileComponent} from './profile/profile.component';
-import {SignupComponent} from './signup/signup.component';
-import {LandingComponent} from './landing/landing.component';
-import {LoginComponent} from './login/login.component';
-import {DocumentComponent} from './document/document.component';
-import {PriceComponent} from './price/price.component';
-import {NavbarComponent} from './shared/navbar/navbar.component';
+import {ProfileComponent} from './pages/profile/profile.component';
+import {SignupComponent} from './pages/signup/signup.component';
+import {LandingComponent} from './pages/landing/landing.component';
+import {LoginComponent} from './pages/login/login.component';
+import {DocumentComponent} from './pages/document/document.component';
+import {PriceComponent} from './pages/price/price.component';
+import {NavbarComponent} from './pages/shared/navbar/navbar.component';
 import {AuthGuard} from './@core/auth/auth.guard';
-import {PhoneComponent} from './signup/phone/phone.component';
-import {AccountComponent} from './signup/account/account.component';
+import {PhoneComponent} from './pages/signup/phone/phone.component';
+import {AccountComponent} from './pages/signup/account/account.component';
 
 const routes: Routes = [
     {path: 'home', component: LandingComponent},
